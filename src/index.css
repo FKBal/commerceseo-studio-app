@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #121318;
+    --bg-card: #25272C;
+    --border-color: #343740;
+    --primary: #5B3DF5;
+    --badge-light: #E8DEFF;
+    --success: #B8F7E4;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Dark mode (default) — force exact palette */
+  html.dark body {
+    background-color: var(--bg-main) !important;
+  }
+
+  /* Light mode */
+  html.light body {
+    background-color: #f8fafc;
+  }
+
+  /* Force dark card surfaces and borders in dark mode */
+  html.dark .bg-slate-950 { background-color: var(--bg-main) !important; }
+  html.dark .dark\:bg-slate-950 { background-color: var(--bg-main) !important; }
+  html.dark .dark\:bg-\[\#25272C\] { background-color: var(--bg-card) !important; }
+  html.dark .dark\:border-slate-800 { border-color: var(--border-color) !important; }
+  html.dark .dark\:border-slate-700 { border-color: var(--border-color) !important; }
+}
+
+@layer utilities {
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes modal-in {
+    from { opacity: 0; transform: scale(0.97) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes slide-in {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes badge-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+  }
+
+  .animate-toast-in { animation: toast-in 0.3s ease-out; }
+  .animate-fade-in { animation: fade-in 0.2s ease-out; }
+  .animate-fade-out { animation: fade-out 0.3s ease-out forwards; }
+  .animate-modal-in { animation: modal-in 0.25s ease-out; }
+  .animate-slide-in { animation: slide-in 0.3s ease-out; }
+  .animate-badge-pulse { animation: badge-pulse 1.5s ease-in-out infinite; }
+
+  @keyframes marching-ants {
+    to { background-position: 16px 0, -16px 0, 0 -16px, 0 16px; }
+  }
+
+  .animate-marching-ants {
+    background-image:
+      repeating-linear-gradient(90deg, #5B3DF5 0, #5B3DF5 8px, transparent 8px, transparent 16px),
+      repeating-linear-gradient(90deg, #5B3DF5 0, #5B3DF5 8px, transparent 8px, transparent 16px),
+      repeating-linear-gradient(0deg, #5B3DF5 0, #5B3DF5 8px, transparent 8px, transparent 16px),
+      repeating-linear-gradient(0deg, #5B3DF5 0, #5B3DF5 8px, transparent 8px, transparent 16px);
+    background-position: 0 0, 0 0, 0 0, 0 0;
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 16px 2px, 16px 2px, 2px 16px, 2px 16px;
+    animation: marching-ants 0.6s linear infinite;
+  }
+}
